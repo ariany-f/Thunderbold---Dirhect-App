@@ -15,9 +15,31 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('companies.index')" :active="request()->routeIs('companies.index')">
-                        {{ __('Companies') }}
-                    </x-nav-link>
+                    @can('view company')
+                        <x-nav-link :href="route('company.index')" :active="request()->routeIs('company.*')">
+                            {{ __('Companies') }}
+                        </x-nav-link>
+                    @endcan
+                    @can('view user')
+                        <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.*')">
+                            {{ __('Users') }}
+                        </x-nav-link>
+                    @endcan
+                    @can('view company group')
+                        <x-nav-link :href="route('company.group.index')" :active="request()->routeIs('company.group.*')">
+                            {{ __('Company Groups') }}
+                        </x-nav-link>
+                    @endcan
+                    @can('view company branch')
+                        <x-nav-link :href="route('company.branch.index')" :active="request()->routeIs('company.branch.*')">
+                            {{ __('Company Branches') }}
+                        </x-nav-link>
+                    @endcan
+                    @can('view employee')
+                        <x-nav-link :href="route('employee.index')" :active="request()->routeIs('employee.*')">
+                            {{ __('Employees') }}
+                        </x-nav-link>
+                    @endcan
                 </div>
             </div>
 

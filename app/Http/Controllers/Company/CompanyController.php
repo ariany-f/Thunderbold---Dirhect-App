@@ -1,30 +1,31 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Company;
 
+use App\Http\Controllers\Controller;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 class CompanyController extends Controller
 {
     public function index()
     {
         $companies = Company::all();
-        return view('companies.index', compact('companies'));
+        return view('company.index', compact('companies'));
     }
 
     public function create()
     {
-        return view('companies.create');
+        return view('company.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required',
+            'main_color' => 'required'
         ]);
 
         $company = Company::create($request->all());
@@ -43,17 +44,17 @@ class CompanyController extends Controller
             '--tenant' => $company->id,
         ]);
 
-        return redirect()->route('companies.index');
+        return redirect()->route('company.index');
     }
 
     public function show(Company $company)
     {
-        return view('companies.show', compact('company'));
+        return view('company.show', compact('company'));
     }
 
     public function edit(Company $company)
     {
-        return view('companies.edit', compact('company'));
+        return view('company.edit', compact('company'));
     }
 
     public function update(Request $request, Company $company)
@@ -63,12 +64,12 @@ class CompanyController extends Controller
         ]);
 
         $company->update($request->all());
-        return redirect()->route('companies.index');
+        return redirect()->route('company.index');
     }
 
     public function destroy(Company $company)
     {
         $company->delete();
-        return redirect()->route('companies.index');
+        return redirect()->route('company.index');
     }
 }
