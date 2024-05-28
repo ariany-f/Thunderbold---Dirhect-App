@@ -41,12 +41,18 @@ class EmployeeController extends Controller
     {
         $user = User::create($request->all());
 
-        $user->assignRole('employee');
-        $user->assignRole('manager');
-
         $data = $request->all();
         $data['user_id'] = $user->id;
         $data['manager'] = (isset($data['manager']) && $data['manager'] === 'ON');
+        if($data['manager'])
+        {
+            $user->assignRole('manager');
+        }
+        else
+        {
+            $user->assignRole('employee');
+        }
+
         $employee = Employee::create($data);
 
         // Obter os IDs das filiais selecionadas do formulário
