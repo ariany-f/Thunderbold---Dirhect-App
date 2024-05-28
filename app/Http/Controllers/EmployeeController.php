@@ -84,7 +84,14 @@ class EmployeeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $employee = Employee::find($id);
+        $groups = CompanyGroup::all();
+        $branches = CompanyBranch::all();
+        $users = User::role('employee')->get();
+        $userIds = $users->pluck('id')->toArray();
+        // Consultar os funcionários com base nos user_ids
+        $employees = Employee::whereIn('user_id', $userIds)->get();
+        return view('employee.edit', compact('employee','groups', 'branches', 'employees'));
     }
 
     /**
@@ -92,7 +99,13 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->all();
+        $data['manager'] = (isset($data['manager']) && $data['manager'] === 'ON');
+
+        $employee = Employee::find($id);
+        $employee->update($data);
+        
+        return redirect()->route('employee.index');
     }
 
     /**
