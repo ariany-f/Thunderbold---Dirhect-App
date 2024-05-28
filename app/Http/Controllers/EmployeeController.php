@@ -104,7 +104,7 @@ class EmployeeController extends Controller
 
         $employee = Employee::find($id);
         $employee->update($data);
-        
+
         return redirect()->route('employee.index');
     }
 
