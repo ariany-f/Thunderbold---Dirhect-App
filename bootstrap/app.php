@@ -14,11 +14,13 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->appendToGroup(
-            'auth:web',
+            'auth',
             [\App\Http\Middleware\EnsureTenantConnection::class]
         );
 
-        $middleware->redirectGuestsTo(fn (Request $request) => route('login'));
+        $middleware->redirectGuestsTo(function(Request $request) {
+            route('login');
+        });
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
