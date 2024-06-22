@@ -26,7 +26,7 @@ class TeamController extends Controller
             // Se for um manager, carrega os membros da equipe (teamMembers)
             $teamMembers = $employee->teamMembers;
         } else {
-            // Lógica para lidar com usuário sem employee associado (se necessário)
+            $teamMembers = collect();
         }
 
         return view('team.index', compact('teamMembers', 'employees', 'employee'));
