@@ -67,4 +67,4 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 
 ## Para realizar as migrations somente para uma company
-php artisan tenant migrate:fresh --tenant=$ID --path=database/migrations/tenant --database=tenant
+php artisan tenant migrate:fresh --tenant=$ID
