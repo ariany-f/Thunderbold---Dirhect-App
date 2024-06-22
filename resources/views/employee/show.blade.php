@@ -25,6 +25,13 @@
                     </div>
                     <div class="mt-6">
                         <p><strong>{{ __('Email:') }}</strong> {{ $employee->email }}</p>
+                        <p><strong>{{ __('Position:') }}</strong> 
+                            @if ($employee->position)
+                                {{ $employee->position->name }}
+                            @else
+                                {{ __('No position assigned') }}
+                            @endif
+                        </p>
                         <p><strong>{{ __('Group:') }}</strong> 
                             @if ($employee->group)
                                 {{ $employee->group->name }}
