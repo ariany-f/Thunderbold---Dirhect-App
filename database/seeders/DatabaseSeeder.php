@@ -40,6 +40,18 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name' => 'edit employee']);
         Permission::create(['name' => 'delete employee']);
         Permission::create(['name' => 'view employee']);
+        Permission::create(['name' => 'create dependent']);
+        Permission::create(['name' => 'edit dependent']);
+        Permission::create(['name' => 'delete dependent']);
+        Permission::create(['name' => 'view dependent']);
+        Permission::create(['name' => 'create positions']);
+        Permission::create(['name' => 'edit positions']);
+        Permission::create(['name' => 'delete positions']);
+        Permission::create(['name' => 'view positions']);
+        Permission::create(['name' => 'create team']);
+        Permission::create(['name' => 'edit team']);
+        Permission::create(['name' => 'delete team']);
+        Permission::create(['name' => 'view team']);
 
         $role1 = Role::create(['name' => 'Super-Admin']);
         $role1->givePermissionTo('create company');
@@ -64,15 +76,38 @@ class DatabaseSeeder extends Seeder
         $role2->givePermissionTo('edit employee');
         $role2->givePermissionTo('delete employee');
         $role2->givePermissionTo('view employee');
+        $role2->givePermissionTo('create dependent');
+        $role2->givePermissionTo('edit dependent');
+        $role2->givePermissionTo('delete dependent');
+        $role2->givePermissionTo('view dependent');
+        $role2->givePermissionTo('create positions');
+        $role2->givePermissionTo('edit positions');
+        $role2->givePermissionTo('delete positions');
+        $role2->givePermissionTo('view positions');
 
         $role3 = Role::create(['name' => 'rh']);
         $role3->givePermissionTo('create employee');
         $role3->givePermissionTo('edit employee');
         $role3->givePermissionTo('delete employee');
         $role3->givePermissionTo('view employee');
+        $role3->givePermissionTo('create dependent');
+        $role3->givePermissionTo('edit dependent');
+        $role3->givePermissionTo('delete dependent');
+        $role3->givePermissionTo('view dependent');
+        $role3->givePermissionTo('create positions');
+        $role3->givePermissionTo('edit positions');
+        $role3->givePermissionTo('delete positions');
+        $role3->givePermissionTo('view positions');
 
         $role4 = Role::create(['name' => 'employee']);
+        $role4->givePermissionTo('view dependent');
 
         $role5 = Role::create(['name' => 'manager']);
+        $role5->givePermissionTo('view dependent');
+        $role5->givePermissionTo('view employee');
+        $role5->givePermissionTo('create team');
+        $role5->givePermissionTo('edit team');
+        $role5->givePermissionTo('delete team');
+        $role5->givePermissionTo('view team');
     }
 }

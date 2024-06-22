@@ -24,6 +24,25 @@
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
 
+                    <!-- Birthdate -->
+                    <div class="mt-4">
+                        <x-input-label for="birthdate" :value="__('Birthdate')" />
+                        <x-text-input id="birthdate" class="block mt-1 w-full" type="date" name="birthdate" :value="$employee->birthdate ?? old('birthdate')" required autocomplete="birthdate" />
+                        <x-input-error :messages="$errors->get('birthdate')" class="mt-2" />
+                    </div>
+                    
+                    <!-- Position -->
+                    <div class="mt-4">
+                        <x-input-label for="position_id" :value="__('Position')" />
+                        <select id="position_id" name="position_id" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                            <option value="">Select Position</option>
+                            @foreach($positions as $position)
+                                <option {{ isset($employee) && $employee->position_id === $position->id ? 'selected' : '' }} value="{{ $position->id }}">{{ $position->name }}</option>
+                            @endforeach
+                        </select>
+                        <x-input-error :messages="$errors->get('position_id')" class="mt-2" />
+                    </div>
+
                     <!-- Group -->
                     <div class="mt-4">
                         <x-input-label for="group_id" :value="__('Group')" />
@@ -38,11 +57,13 @@
 
                     <!-- Branch -->
                     <div class="mt-4">
-                        <x-input-label for="branch_id" :value="__('Group')" />
+                        <x-input-label for="branch_id" :value="__('Branches')" />
                         <select multiple id="branch_id" name="branch_id[]" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
                             <option value="">Select Branches</option>
                             @foreach($branches as $branch)
-                                <option value="{{ $branch->id }}">{{ $branch->name }}</option>
+                            <option value="{{ $branch->id }}" {{ in_array($branch->id, $employee->company_branches->pluck('id')->toArray()) ? 'selected' : '' }}>
+                                {{ $branch->name }}
+                            </option>
                             @endforeach
                         </select>
                         <x-input-error :messages="$errors->get('group_id')" class="mt-2" />
@@ -56,7 +77,7 @@
                     </div>
 
                     <div class="flex items-center gap-4">
-                        <x-primary-button type="submit">{{ __('Create') }}</x-primary-button>
+                        <x-primary-button type="submit">{{ __('Edit') }}</x-primary-button>
                     </div>
                 </form>
             </div>

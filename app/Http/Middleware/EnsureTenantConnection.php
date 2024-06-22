@@ -20,6 +20,7 @@ class EnsureTenantConnection
         {
             return $next($request);
         }
+        
         app(TenantConnection::class, [
             'user' => $user
         ])->execute('company'.$user->company_id);

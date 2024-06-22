@@ -24,12 +24,34 @@ class Employee extends Model
         'name',
         'email',
         'user_id',
+        'birthdate',
         'group_id',
-        'manager'
+        'manager',
+        'position_id'
     ];
 
     public function company_branches()
     {
-        return $this->belongsToMany(CompanyBranch::class, 'company_branch_employees');
+        return $this->belongsToMany(CompanyBranch::class, 'company_branch_employees', 'employee_id', 'branch_id');
+    }
+
+    public function dependents()
+    {
+        return $this->hasMany(Dependent::class);
+    }
+
+    public function position()
+    {
+        return $this->belongsTo(Position::class);
+    }
+    
+    public function managers()
+    {
+        return $this->belongsToMany(Employee::class, 'employee_manager', 'employee_id', 'manager_id');
+    }
+
+    public function teamMembers()
+    {
+        return $this->belongsToMany(Employee::class, 'employee_manager', 'manager_id', 'employee_id');
     }
 }

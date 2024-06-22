@@ -15,7 +15,6 @@ class TenantConnection
     public function execute($tenant): void
     {
         DB::purge('tenant');
-
         config()->set('database.connections.tenant.database', $tenant);
 
         DB::reconnect('tenant');

@@ -22,6 +22,26 @@
                         <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
+                    
+                    <!-- Birthdate -->
+                    <div class="mt-4">
+                        <x-input-label for="birthdate" :value="__('Birthdate')" />
+                        <x-text-input id="birthdate" class="block mt-1 w-full" type="date" name="birthdate" :value="old('birthdate')" required autocomplete="birthdate" />
+                        <x-input-error :messages="$errors->get('birthdate')" class="mt-2" />
+                    </div>
+                    
+                    <!-- Position -->
+                    <div class="mt-4">
+                        <x-input-label for="position_id" :value="__('Position')" />
+                        <select id="position_id" name="position_id" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                            <option value="">Select Position</option>
+                            @foreach($positions as $position)
+                                <option {{ isset($employee) && $employee->position_id === $position->id ? 'selected' : '' }} value="{{ $position->id }}">{{ $position->name }}</option>
+                            @endforeach
+                        </select>
+                        <x-input-error :messages="$errors->get('position_id')" class="mt-2" />
+                    </div>
+
 
                     <!-- Group -->
                     <div class="mt-4">

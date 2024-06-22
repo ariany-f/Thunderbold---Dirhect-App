@@ -40,6 +40,23 @@
                             {{ __('Employees') }}
                         </x-nav-link>
                     @endcan
+                    @if(auth()->user()->hasRole(['employee', 'manager', 'rh']))
+                        @can('view dependent')
+                            <x-nav-link :href="route('dependents.index')" :active="request()->routeIs('dependents.*')">
+                                {{ __('Dependents') }}
+                            </x-nav-link>
+                        @endcan
+                    @endif
+                    @can('view positions')
+                        <x-nav-link :href="route('positions.index')" :active="request()->routeIs('positions.*')">
+                            {{ __('Positions') }}
+                        </x-nav-link>
+                    @endcan
+                    @can('view team')
+                        <x-nav-link :href="route('team.index')" :active="request()->routeIs('team.*')">
+                            {{ __('Team') }}
+                        </x-nav-link>
+                    @endcan
                 </div>
             </div>
 
